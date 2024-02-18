@@ -1,9 +1,10 @@
 const button = document.querySelector('.button-set-size');
 const gridContainer = document.querySelector('.grid-container');
-let squaresPerSide = 0;
+let gridSize = 0;
 
 //function: generate grid
 function generateSquareGrid(squaresPerSide) {
+    gridSize = squaresPerSide;
     const totalSquares = squaresPerSide**2;
     wipeContent();
     const gridWidth = getGridWidth();
@@ -50,8 +51,11 @@ function setSquareDimensions(element, squareSideSize) {
     element.style.height = `${squareSideSize}px`;    
 }
 
-
-
+window.addEventListener('resize', () => {
+    const gridWidth = getGridWidth();
+    const squareSideSize = getSquareSideSize(gridWidth, gridSize);
+    resizeGridSquares(squareSideSize);
+})
 
 generateSquareGrid(20);
 
