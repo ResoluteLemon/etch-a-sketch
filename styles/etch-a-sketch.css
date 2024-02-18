@@ -28,3 +28,7 @@ body {
     background-color: rgb(192, 183, 171);
     border: 1px solid black;
 }
+
+.square:hover {
+    background-color: black;
+}

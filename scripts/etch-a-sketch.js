@@ -3,7 +3,8 @@ const gridContainer = document.querySelector('.grid-container');
 let gridSize = 0;
 
 //function: generate grid
-function generateSquareGrid(squaresPerSide) {
+function generateSquareGrid() {
+    const squaresPerSide = prompt('Choose a grid size: ');
     gridSize = squaresPerSide;
     const totalSquares = squaresPerSide**2;
     wipeContent();
@@ -12,6 +13,7 @@ function generateSquareGrid(squaresPerSide) {
     populateGrid(totalSquares, squareSideSize);
 }
 
+button.addEventListener('click', generateSquareGrid);
 
 function wipeContent() {
     gridContainer.innerHTML = '';
@@ -56,8 +58,6 @@ window.addEventListener('resize', () => {
     const squareSideSize = getSquareSideSize(gridWidth, gridSize);
     resizeGridSquares(squareSideSize);
 })
-
-generateSquareGrid(20);
 
 
 //DO: generate grid
