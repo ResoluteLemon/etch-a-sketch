@@ -27,8 +27,7 @@ function getSquareSideSize(gridWidth, squaresPerSide) {
 function createSquare(squareSideSize) {
     const squareElement = document.createElement('div');
     squareElement.classList.add('square');
-    squareElement.style.width = `${squareSideSize}px`;
-    squareElement.style.height = `${squareSideSize}px`;
+    setSquareDimensions(squareElement, squareSideSize);
     return squareElement;
 }
 
@@ -38,7 +37,24 @@ function populateGrid(totalSquares, squareSideSize) {
     }
 }
 
+function resizeGridSquares(squareSideSize) {
+    const squares = document.querySelectorAll('.square');
+    let count = 0;
+    squares.forEach(element => {
+        setSquareDimensions(element, squareSideSize);
+    })
+}
+
+function setSquareDimensions(element, squareSideSize) {
+    element.style.width = `${squareSideSize}px`;
+    element.style.height = `${squareSideSize}px`;    
+}
+
+
+
+
 generateSquareGrid(20);
+
 
 //DO: generate grid
 //function: wipe existing container content, if any
