@@ -4,7 +4,7 @@ let gridSize = 0;
 
 //function: generate grid
 function generateSquareGrid() {
-    const squaresPerSide = prompt('Choose a grid size: ');
+    const squaresPerSide = getUserInput();
     gridSize = squaresPerSide;
     const totalSquares = squaresPerSide**2;
     wipeContent();
@@ -13,9 +13,20 @@ function generateSquareGrid() {
     populateGrid(totalSquares, squareSideSize);
 }
 
+function getUserInput() {
+    let inputValue = parseInt(prompt('Choose a grid size: '), 10); 
+    while(isNaN(inputValue) || inputValue > 100) {
+        alert('Input must be a number and less than 100');
+        inputValue = parseInt(prompt('Choose a grid size: '), 10);
+    }
+    return inputValue;
+}
+
+
 button.addEventListener('click', generateSquareGrid);
 
 function wipeContent() {
+    removeAllEventHandlers();
     gridContainer.innerHTML = '';
 }
 
@@ -31,6 +42,7 @@ function createSquare(squareSideSize) {
     const squareElement = document.createElement('div');
     squareElement.classList.add('square');
     setSquareDimensions(squareElement, squareSideSize);
+    squareElement.addEventListener('mouseover', changeColourOnHover);
     return squareElement;
 }
 
@@ -58,6 +70,21 @@ window.addEventListener('resize', () => {
     const squareSideSize = getSquareSideSize(gridWidth, gridSize);
     resizeGridSquares(squareSideSize);
 })
+
+function removeAllEventHandlers() {
+    elements = document.querySelectorAll('.square');
+    elements.forEach(element => {
+        element.removeEventListener('mouseover', changeColourOnHover);
+    })
+}
+
+function changeColourOnHover(event) {
+    event.target.style.backgroundColor = `rgb(${randomRgb()},${randomRgb()},${randomRgb()})`;
+}
+
+function randomRgb() {
+    return Math.floor(Math.random()*256);
+}
 
 
 //DO: generate grid
